@@ -1,0 +1,14 @@
+version: '3.2'
+services:
+  selenium-monitor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    container_name: selenium-monitor-container
+    volumes:
+      - .:/repo
+    working_dir: /repo
+    command: bash -c ./docker-guest-start.sh
+#    ports:
+#      - 8081:8080

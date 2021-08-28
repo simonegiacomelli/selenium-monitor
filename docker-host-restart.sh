@@ -1,0 +1,1 @@
+git pull && docker restart selenium-monitor-container && tail -F docker-guest.log

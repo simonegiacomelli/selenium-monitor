@@ -10,5 +10,6 @@ services:
       - .:/repo
     working_dir: /repo
     command: bash -c ./docker-guest-start.sh
-#    ports:
+    ports:
+       - "7900:7900"
 #      - 8081:8080

@@ -3,7 +3,7 @@ import java.util.*
 
 
 fun main() {
-    repeat(1) {
+    while (true) {
         val states = States(previousState(), liveState())
         states.saveStateFile()
 
@@ -11,13 +11,17 @@ fun main() {
             println(states.message)
             logFile().appendText(states.message)
             sendEmail("SoYouStart-monitor - ${states.date}", "$soyoustartHref\n\n" + states.message)
+        } else {
+            println(states.header)
+            println("no changes")
         }
+        Thread.sleep(1000 * 60 * 5)
     }
 }
 
 class States(val old: List<String>, val new: List<String>) {
     val date: String = df.format(Date())
-    private val header: String = "=".repeat(50) + " $date " + "=".repeat(50)
+    val header: String = "=".repeat(50) + " $date " + "=".repeat(50)
     fun saveStateFile() = previousStateFile().writeText(new.joinToString("\n"))
     private val psSet = old.toSet()
     private val lsSet = new.toSet()
